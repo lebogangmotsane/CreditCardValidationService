@@ -10,7 +10,7 @@ WORKDIR /src
 COPY ["CreditCardValidationService/CreditCardValidationService.csproj", "CreditCardValidationService/"]
 COPY ["CreditCardValidationService.Contracts/CreditCardValidationService.Contracts.csproj", "CreditCardValidationService.Contracts/"]
 COPY ["CreditCardValidationService.Models/CreditCardValidationService.Models.csproj", "CreditCardValidationService.Models/"]
-COPY ["CreditCardValidationService.Repository/CreditCardValidationService.Services.csproj", "CreditCardValidationService.Repository/"]
+COPY ["CreditCardValidationService.Services/CreditCardValidationService.Services.csproj", "CreditCardValidationService.Services/"]
 RUN dotnet restore "CreditCardValidationService/CreditCardValidationService.csproj"
 COPY . .
 WORKDIR "/src/CreditCardValidationService"

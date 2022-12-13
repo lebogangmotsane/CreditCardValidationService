@@ -1,5 +1,5 @@
 using CreditCardValidationService.Contracts;
-using CreditCardValidationService.Repository;
+using CreditCardValidationService.Services;
 using NUnit.Framework;
 
 namespace CreditCardValidationService.Tests

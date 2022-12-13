@@ -19,7 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CreditCardValidationService.Contracts\CreditCardValidationService.Contracts.csproj" />
     <ProjectReference Include="..\CreditCardValidationService.Models\CreditCardValidationService.Models.csproj" />
-    <ProjectReference Include="..\CreditCardValidationService.Repository\CreditCardValidationService.Services.csproj" />
+    <ProjectReference Include="..\CreditCardValidationService.Services\CreditCardValidationService.Services.csproj" />
   </ItemGroup>
 
 </Project>

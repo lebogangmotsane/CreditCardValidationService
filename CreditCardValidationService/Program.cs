@@ -1,5 +1,5 @@
 using CreditCardValidationService.Contracts;
-using CreditCardValidationService.Repository;
+using CreditCardValidationService.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 

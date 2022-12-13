@@ -1,14 +1,13 @@
 ﻿using CreditCardValidationService.Contracts;
-using CreditCardValidationService.Models;
 
-namespace CreditCardValidationService.Repository
+namespace CreditCardValidationService.Services
 {
     public class ValidateCreditCardNumberService : IValidateCreditCardNumberService
     {
         public ValidateCreditCardNumberService() { }
 
 
-       public bool ValidateCreditCardNumber(string cardNumber)
+        public bool ValidateCreditCardNumber(string cardNumber)
         {
             int sum = cardNumber.Where((currentDigit) => currentDigit >= '0' && currentDigit <= '9')
                 .Reverse()  //loop backwards through digits of the card
@@ -18,7 +17,7 @@ namespace CreditCardValidationService.Repository
 
             return sum % 10 == 0;
 
-            
+
         }
 
         public bool IsCreditCardNumberNumeric(string cardNumber)
@@ -28,7 +27,7 @@ namespace CreditCardValidationService.Repository
             foreach (char cN in cardNumber)
             {
                 if (cN < '0' || cN > '9')
-                    isCardNumberNumeric= false;
+                    isCardNumberNumeric = false;
             }
 
             return isCardNumberNumeric;
