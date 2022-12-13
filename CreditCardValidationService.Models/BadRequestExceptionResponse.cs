@@ -8,7 +8,6 @@ namespace CreditCardValidationService.Models
 {
     public class BadRequestExceptionResponse
     {
-        public string StatusCode { get; set; } = "400";
-        public bool IsValid { get; set; } = false;
+        public string? Error { get; set; }
     }
 }

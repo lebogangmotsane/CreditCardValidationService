@@ -1,4 +1,5 @@
 ﻿using CreditCardValidationService.Contracts;
+using CreditCardValidationService.Models;
 
 namespace CreditCardValidationService.Repository
 {
@@ -17,18 +18,20 @@ namespace CreditCardValidationService.Repository
 
             return sum % 10 == 0;
 
+            
         }
 
         public bool IsCreditCardNumberNumeric(string cardNumber)
         {
+            bool isCardNumberNumeric = true;
+
             foreach (char cN in cardNumber)
             {
                 if (cN < '0' || cN > '9')
-                    return false;
+                    isCardNumberNumeric= false;
             }
 
-            return true;
-
+            return isCardNumberNumeric;
         }
 
     }

@@ -1,24 +1,42 @@
 using CreditCardValidationService.Contracts;
 using CreditCardValidationService.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddApiVersioning();
 builder.Services.AddScoped<IValidateCreditCardNumberService, ValidateCreditCardNumberService>();
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
+
+builder.Services.AddSwaggerGen(option =>
+{
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Credit Card Validation Service" });
+});
 
 var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapGet("/", () => "Hello World!");
-app.MapGet("api/validate/{cardNumber}", 
-    ([FromServices]IValidateCreditCardNumberService service ,string cardNumber) =>  
-        service.ValidateCreditCardNumber(cardNumber));
+app.MapControllerRoute(name: "validate",
+                pattern: "api/validate/{cardNumber}",
+                defaults: new { controller = "CreditCardValidation", action = "Validate" });
+
+//app.MapGet("/", () => "Hello World!");
+//app.MapGet("api/validate/{cardNumber}", 
+//    ([FromServices]IValidateCreditCardNumberService service ,string cardNumber) =>  
+//        service.ValidateCreditCardNumber(cardNumber));
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseRouting();
 

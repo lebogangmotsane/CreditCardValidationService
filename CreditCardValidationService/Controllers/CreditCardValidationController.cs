@@ -2,16 +2,16 @@
 using CreditCardValidationService.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Web.Http;
-using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
-using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
+using System.Text.Json.Nodes;
+//using System.Web.Http;
 
 namespace CreditCardValidationService.Controllers
 {
+    [ApiVersionNeutral]
     [ApiController]
     [Route("api/validate")]
 
-    public class CreditCardValidationController : ApiController
+    public class CreditCardValidationController : Controller
     {
 
         private readonly IValidateCreditCardNumberService _service;
@@ -20,23 +20,40 @@ namespace CreditCardValidationService.Controllers
             _service = service;
         }
 
-        [HttpGet("{cardNumber}")]
-        public ActionResult<bool> Validate(string cardNumber, Exception badRequestExceptionResponse)
+        [HttpGet, Route("{cardNumber}")]
+        public IActionResult Validate(string cardNumber)
         {
             try
             {
-                var isNumericString = _service.IsCreditCardNumberNumeric(cardNumber);
-                if (isNumericString == false)
+                var isNumericString =  _service.IsCreditCardNumberNumeric(cardNumber);
+                if (!isNumericString == false)
                 {
+                    bool ValidatedResult = _service.ValidateCreditCardNumber(cardNumber);
 
-                    throw badRequestExceptionResponse;
+                    ValidationResponse response = new ValidationResponse
+                    {
+                        IsValid = ValidatedResult
+                    };
+
+                    return Ok(response);
                 }
-                bool result = _service.ValidateCreditCardNumber(cardNumber);
-                return result;
+                else
+                {
+                    BadRequestExceptionResponse badRequest = new BadRequestExceptionResponse
+                    {
+                        Error = "Credit card number must be numeric"
+                    };
+                    return BadRequest(badRequest);
+                } 
 
             }
-            catch(Exception ex) {
-                return false;
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            finally
+            {
+                Console.Write("Re-try with a different number.");
             }
 
         }

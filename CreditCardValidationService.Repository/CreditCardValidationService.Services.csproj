@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CreditCardValidationService.Contracts\CreditCardValidationService.Contracts.csproj" />
+    <ProjectReference Include="..\CreditCardValidationService.Models\CreditCardValidationService.Models.csproj" />
   </ItemGroup>
 
 </Project>
