@@ -27,11 +27,6 @@ app.MapControllerRoute(name: "validate",
                 pattern: "api/validate/{cardNumber}",
                 defaults: new { controller = "CreditCardValidation", action = "Validate" });
 
-//app.MapGet("/", () => "Hello World!");
-//app.MapGet("api/validate/{cardNumber}", 
-//    ([FromServices]IValidateCreditCardNumberService service ,string cardNumber) =>  
-//        service.ValidateCreditCardNumber(cardNumber));
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

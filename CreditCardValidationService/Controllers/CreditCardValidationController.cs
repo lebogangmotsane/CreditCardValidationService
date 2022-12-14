@@ -1,9 +1,6 @@
 ﻿using CreditCardValidationService.Contracts;
 using CreditCardValidationService.Models;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Text.Json.Nodes;
-//using System.Web.Http;
 
 namespace CreditCardValidationService.Controllers
 {
@@ -49,11 +46,7 @@ namespace CreditCardValidationService.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
-            }
-            finally
-            {
-                Console.Write("Re-try with a different number.");
+                return BadRequest(String.Format("Exception caught : {0}", ex.Message));
             }
 
         }

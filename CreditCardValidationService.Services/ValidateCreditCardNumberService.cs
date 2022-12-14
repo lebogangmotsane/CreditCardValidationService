@@ -6,17 +6,25 @@ namespace CreditCardValidationService.Services
     {
         public ValidateCreditCardNumberService() { }
 
-
         public bool ValidateCreditCardNumber(string cardNumber)
         {
-            int sum = cardNumber.Where((currentDigit) => currentDigit >= '0' && currentDigit <= '9')
-                .Reverse()  //loop backwards through digits of the card
-                .Select((currentDigit, i) => (
-                currentDigit - 48) * (i % 2 == 0 ? 1 : 2))
-                .Sum((currentDigit) => currentDigit / 10 + currentDigit % 10); //
-
+            var sum = 0;
+            var parity = cardNumber.Length % 2;
+         
+            for (var i = cardNumber.Length - 1; i >= 0; i--)
+            {
+                var currentDigit = int.Parse(cardNumber[i].ToString());
+                if (i % 2 == parity)
+                {
+                    currentDigit *= 2;
+                }                   
+                 if(currentDigit > 9)
+                {
+                    currentDigit -= 9;
+                }                    
+                sum += currentDigit;
+            }
             return sum % 10 == 0;
-
 
         }
 
