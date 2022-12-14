@@ -15,51 +15,51 @@ namespace CreditCardValidationService.Tests
             _service = new ValidateCreditCardNumberService();
         }
 
-        [Test]
+        [TestCase]
         public void IsCardNumberValid()
         {
             var result1 = _service.ValidateCreditCardNumber("49927398716");
-            Assert.IsTrue(result1, "isValid");           
+            Assert.That(result1, Is.True, "isValid");           
            
         }
 
 
-        [Test]
+        [TestCase]
         public void IsCardNumberValidTest2()
         {
             var result2 = _service.ValidateCreditCardNumber("49927398717");
-            Assert.IsFalse(result2, "isNotValid");
+            Assert.That(result2, Is.False, "isNotValid");
         }
 
 
-        [Test]
+        [TestCase]
         public void IsCardNumberValidTest3()
         {
             var result3 = _service.ValidateCreditCardNumber("1234567812345678");
-            Assert.IsFalse(result3, "isNotValid");
+            Assert.That(result3, Is.False, "isNotValid");
         }
 
 
-        [Test]
+        [TestCase]
         public void IsCardNumberValidTest4()
         {
             var result4 = _service.ValidateCreditCardNumber("1234567812345670");
-            Assert.That(result4, "isValid");
+            Assert.That(result4, Is.True, "isValid");
         }
 
 
-        [Test]
+        [TestCase]
         public void IsCardNumberValidTest5()
         {
             var result5 = _service.ValidateCreditCardNumber("2222405343248877");
-            Assert.That(result5, "isValid");
+            Assert.That(result5, Is.True, "isValid");
 
         }
-        [Test]
+        [TestCase]
         public void IsCardNumberValidTest6()
         {
             var result6 = _service.ValidateCreditCardNumber("2222990905257051");
-            Assert.IsTrue(result6, "isValid");
+            Assert.That(result6, Is.True, "isValid");
         }
     }
     }
